@@ -1,9 +1,24 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+/*
+
+Add sound {
+    Joke(Tennis Sound?) 
+}
+
+Add Fancy GFX {
+
+    Trails, Particles etc
+}
+
+Add AI ()
+
+*/
 
 namespace Pong
 {
+
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
@@ -11,12 +26,19 @@ namespace Pong
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        platform PlatformRight = new platform();
+        platform PlatformLeft = new platform();
+        public static int SchreenHeight;
+        public static int SchreenWith;
+
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            
         }
+        //static resolution = graphics.windowsize;
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -26,7 +48,17 @@ namespace Pong
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            SchreenHeight = graphics.GraphicsDevice.Viewport.Height; //This needs to be set for (or be aviable to) ALL Platform items
+            SchreenWith = graphics.GraphicsDevice.Viewport.Width;
+            PlatformLeft.Position.X = 0;
+            PlatformLeft.ControlUp = Keys.W;
+            PlatformLeft.ControlDown = Keys.S;
+            PlatformRight.Position.X= 0.9f;
+            PlatformRight.ControlUp = Keys.Up;
+            PlatformRight.ControlDown = Keys.Down;
+            //Bal.position = (.5, .5);
+            //Bal.speed = ()
+            
 
             base.Initialize();
         }
@@ -39,6 +71,12 @@ namespace Pong
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            
+            PlatformLeft.sprite = Content.Load<Texture2D>("blauweSpeler.png");
+            PlatformRight.sprite = Content.Load<Texture2D>("rodeSpeler.png");
+          //  Bal.sprite = Content.Load<Texture2D>("bal.png");
+            
 
             // TODO: use this.Content to load your game content here
         }
@@ -59,10 +97,11 @@ namespace Pong
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            PlatformLeft.Move();
+            PlatformRight.Move();
 
-            // TODO: Add your update logic here
 
             base.Update(gameTime);
         }
@@ -73,11 +112,16 @@ namespace Pong
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            GraphicsDevice.Clear(Color.DarkBlue);
+            spriteBatch.Begin();
+            
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+            PlatformLeft.Draw(spriteBatch);
+            PlatformRight.Draw(spriteBatch);
+
+            spriteBatch.End();
         }
     }
 }
