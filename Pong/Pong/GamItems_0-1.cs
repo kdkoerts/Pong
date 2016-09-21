@@ -29,11 +29,14 @@ namespace Pong
                 }
             }
         }
-        public void Draw(SpriteBatch spritebatch)   //draw the Sprite from float 0-1 position
+        public void Draw(SpriteBatch spritebatch)   
         {
+            //draw the Sprite from float 0-1 position
+            //The pixel position is calculated with a ConversionFactor
+            //It is created with the schreen resolution and the sprite size
             Vector2 SpritePosition;
-            Vector2 ResolutionFactor = new Vector2(Game1.SchreenWith, Game1.SchreenHeight);
-            //Correct resolution factor for sprite height. Find property's with 
+            Vector2 ResolutionFactor = new Vector2(Game1.SchreenWith - sprite.Width, Game1.SchreenHeight - sprite.Height);
+             
             SpritePosition = Position * ResolutionFactor;
                         
             spritebatch.Draw(sprite, SpritePosition); //Vector2 pos in pixels from top left.

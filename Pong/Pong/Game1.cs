@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 /*
 
 Add sound {
-    Joke(Tennis Sound?) 
+    Joke(Tennis grunting Sound?) 
 }
 
 Add Fancy GFX {
@@ -53,7 +53,7 @@ namespace Pong
             PlatformLeft.Position.X = 0;
             PlatformLeft.ControlUp = Keys.W;
             PlatformLeft.ControlDown = Keys.S;
-            PlatformRight.Position.X= 0.9f;
+            PlatformRight.Position.X= 1f;
             PlatformRight.ControlUp = Keys.Up;
             PlatformRight.ControlDown = Keys.Down;
             //Bal.position = (.5, .5);
