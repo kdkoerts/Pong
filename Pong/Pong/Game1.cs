@@ -48,8 +48,9 @@ namespace Pong
         /// </summary>
         protected override void Initialize()
         {
-            SchreenHeight = graphics.GraphicsDevice.Viewport.Height; //This needs to be set for (or be aviable to) ALL Platform items
+            SchreenHeight = graphics.GraphicsDevice.Viewport.Height; //This is needed in the platform.draw()
             SchreenWith = graphics.GraphicsDevice.Viewport.Width;
+            //Add data to the platforms: start position, controls etc.
             PlatformLeft.Position.X = 0;
             PlatformLeft.ControlUp = Keys.W;
             PlatformLeft.ControlDown = Keys.S;
@@ -72,13 +73,11 @@ namespace Pong
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            
+            //The sprites for the platforms
             PlatformLeft.sprite = Content.Load<Texture2D>("blauweSpeler.png");
             PlatformRight.sprite = Content.Load<Texture2D>("rodeSpeler.png");
           //  Bal.sprite = Content.Load<Texture2D>("bal.png");
             
-
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -99,6 +98,9 @@ namespace Pong
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            //exit on pressing escape
+
+            //Move / update the platforms
             PlatformLeft.Move();
             PlatformRight.Move();
 
@@ -112,12 +114,12 @@ namespace Pong
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.DarkBlue);
+            GraphicsDevice.Clear(Color.DarkBlue); //replace previous image with background color
             spriteBatch.Begin();
-            
-            // TODO: Add your drawing code here
-
             base.Draw(gameTime);
+
+
+            //Draw the items with their draw functions
             PlatformLeft.Draw(spriteBatch);
             PlatformRight.Draw(spriteBatch);
 
