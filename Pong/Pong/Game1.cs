@@ -59,7 +59,7 @@ namespace Pong
             PlatformRight.ControlUp = Keys.Up;
             PlatformRight.ControlDown = Keys.Down;
             Ball.Position = new Vector2(0.1f, 0.5f);
-            Ball.Velocity = new Vector2(0.005f, 0.0f);
+            Ball.Velocity = new Vector2(0.005f, -0.005f);
             //Ball.speed = ()
             
 
