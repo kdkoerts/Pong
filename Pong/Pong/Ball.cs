@@ -18,6 +18,7 @@ namespace Pong
         public void Update()
         {
             Position = Position + Velocity;
+            ColisionHandeler();
             // Collision nog toevoegen Hi
 
 

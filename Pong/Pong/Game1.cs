@@ -58,7 +58,8 @@ namespace Pong
             PlatformRight.Position.X= 1f;
             PlatformRight.ControlUp = Keys.Up;
             PlatformRight.ControlDown = Keys.Down;
-            Ball.Position = new Vector2(0.5f, 0.5f);
+            Ball.Position = new Vector2(0.1f, 0.5f);
+            Ball.Velocity = new Vector2(0.005f, -0.005f);
             //Ball.speed = ()
             
 
@@ -116,7 +117,7 @@ namespace Pong
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Yellow); //replace previous image with background color
+            GraphicsDevice.Clear(Color.Black); //replace previous image with background color
             spriteBatch.Begin();
             base.Draw(gameTime);
 

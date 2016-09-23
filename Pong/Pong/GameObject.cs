@@ -30,5 +30,28 @@ namespace Pong
             spritebatch.Draw(sprite, SpritePosition); //Vector2 pos in pixels from top left.
 
         }
+        public void ColisionHandeler() //Check and handle a collision.
+        {
+            if (Position.Y <= 0)
+            {
+                Velocity.Y = -Velocity.Y;
+            }
+            if (Position.Y >= 1)
+            {
+                Velocity.Y = -Velocity.Y;
+            }
+            if (Position.X >= 1)
+            {
+                Velocity.X = -Velocity.X;
+                //Goal!!
+                //Kill Ball
+                //Do Score Update()
+                //Ball.Respawn()
+            }
+            if (Position.X <= 0)
+            {
+                Velocity.X = -Velocity.X;
+            }
+        }
     }
 }
