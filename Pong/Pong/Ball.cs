@@ -11,13 +11,13 @@ namespace Pong
 {
     class Ball : GameObject
     {
-        public Vector2 Position;
-        public Vector2 Speed;
-        public Texture2D sprite;
+        //public Vector2 Position;
+        //public Vector2 Speed;
+        //public Texture2D sprite;
 
         public void Update()
         {
-            Position = Position + Speed;
+            Position = Position + Velocity;
             // Collision nog toevoegen Hi
 
 

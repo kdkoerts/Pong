@@ -11,11 +11,11 @@ namespace Pong
 {
     public class GameObject //Draw a given sprite at a given position
     {
-        public new string Name;
-        public new Vector2 Position;
-        public new Vector2 Velocity;
-        public new float MaxVelocity;
-        public new Texture2D sprite;
+        public string Name;
+        public Vector2 Position;
+        public Vector2 Velocity;
+        public float MaxVelocity;
+        public Texture2D sprite;
 
         public void Draw(SpriteBatch spritebatch)
         {
