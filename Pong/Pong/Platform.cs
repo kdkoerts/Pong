@@ -6,9 +6,9 @@ namespace Pong
 {
     public class platform : GameObject
     {
-        public Vector2 Position;
+        //public Vector2 Position;
         public float MaxVelocity = 0.005f;
-        public Texture2D sprite;
+        //public Texture2D sprite;
         public Keys ControlUp;
         public Keys ControlDown;
 
