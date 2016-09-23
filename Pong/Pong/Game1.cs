@@ -28,6 +28,7 @@ namespace Pong
         SpriteBatch spriteBatch;
         platform PlatformRight = new platform();
         platform PlatformLeft = new platform();
+        Ball Ball = new Ball();
         public static int SchreenHeight;
         public static int SchreenWith;
 
@@ -57,8 +58,8 @@ namespace Pong
             PlatformRight.Position.X= 1f;
             PlatformRight.ControlUp = Keys.Up;
             PlatformRight.ControlDown = Keys.Down;
-            //Bal.position = (.5, .5);
-            //Bal.speed = ()
+            Ball.Position = new Vector2(0.5f, 0.5f);
+            //Ball.speed = ()
             
 
             base.Initialize();
@@ -76,7 +77,7 @@ namespace Pong
             //The sprites for the platforms
             PlatformLeft.sprite = Content.Load<Texture2D>("blauweSpeler.png");
             PlatformRight.sprite = Content.Load<Texture2D>("rodeSpeler.png");
-          //  Bal.sprite = Content.Load<Texture2D>("bal.png");
+            Ball.sprite = Content.Load<Texture2D>("bal.png");
             
         }
 
@@ -114,7 +115,7 @@ namespace Pong
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.DarkBlue); //replace previous image with background color
+            GraphicsDevice.Clear(Color.Yellow); //replace previous image with background color
             spriteBatch.Begin();
             base.Draw(gameTime);
 
@@ -122,6 +123,7 @@ namespace Pong
             //Draw the items with their draw functions
             PlatformLeft.Draw(spriteBatch);
             PlatformRight.Draw(spriteBatch);
+            Ball.Draw(spriteBatch);
 
             spriteBatch.End();
         }
