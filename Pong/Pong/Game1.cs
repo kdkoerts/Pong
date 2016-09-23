@@ -104,6 +104,7 @@ namespace Pong
             //Move / update the platforms
             PlatformLeft.Move();
             PlatformRight.Move();
+            Ball.Update();
 
 
             base.Update(gameTime);
