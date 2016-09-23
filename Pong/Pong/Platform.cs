@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Pong
 {
-    public class platform
+    public class platform : GameObject
     {
         public Vector2 Position;
         public float MaxVelocity = 0.005f;

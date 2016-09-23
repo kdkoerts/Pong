@@ -41,7 +41,7 @@
     <Compile Include="Ball.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="GamItems_0-1.cs" />
+    <Compile Include="Platform.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

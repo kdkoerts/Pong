@@ -9,8 +9,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Pong
 {
-    class GameObject //Draw a given sprite at a given position
+    public class GameObject //Draw a given sprite at a given position
     {
+        new string Name;
         new Vector2 Position;
         new Vector2 Velocity;
         new float MaxVelocity;
