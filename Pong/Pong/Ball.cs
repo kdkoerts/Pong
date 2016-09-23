@@ -18,7 +18,7 @@ namespace Pong
         public void Update()
         {
             Position = Position + Speed;
-            // Collision nog toevoegen
+            // Collision nog toevoegen Hi
 
 
         }
