@@ -35,23 +35,35 @@ namespace Pong
             if (Position.Y <= 0)
             {
                 Velocity.Y = -Velocity.Y;
+                Velocity = Velocity * new Vector2(1.1f, 1.1f); //add speed on collision
             }
             if (Position.Y >= 1)
             {
                 Velocity.Y = -Velocity.Y;
+                Velocity = Velocity * new Vector2(1.1f, 1.1f);
             }
             if (Position.X >= 1)
             {
                 Velocity.X = -Velocity.X;
+                Velocity = Velocity * new Vector2(1.1f, 1.1f);
+                //remove
                 //Goal!!
-                //Kill Ball
-                //Do Score Update()
+                //Ball.Kill()
+                //Score.Update()
                 //Ball.Respawn()
             }
             if (Position.X <= 0)
             {
                 Velocity.X = -Velocity.X;
+                Velocity = Velocity * new Vector2(1.1f, 1.1f);
+                //remove
+                //Goal!!
+                //Ball.Kill()
+                //Score.Update()
+                //Ball.Respawn()
             }
+            //Collision with platform
+            
         }
     }
 }
