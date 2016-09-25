@@ -16,6 +16,7 @@ namespace Pong
         public Vector2 Velocity;
         public float MaxVelocity;
         public Texture2D sprite;
+        public Vector2 VelocityModifier = new Vector2(1f, 1f);
 
         public void Draw(SpriteBatch spritebatch)
         {
@@ -35,17 +36,17 @@ namespace Pong
             if (Position.Y <= 0)
             {
                 Velocity.Y = -Velocity.Y;
-                Velocity = Velocity * new Vector2(1.1f, 1.1f); //add speed on collision
+                Velocity = Velocity * VelocityModifier; //add speed on collision
             }
             if (Position.Y >= 1)
             {
                 Velocity.Y = -Velocity.Y;
-                Velocity = Velocity * new Vector2(1.1f, 1.1f);
+                Velocity = Velocity * VelocityModifier;
             }
             if (Position.X >= 1)
             {
                 Velocity.X = -Velocity.X;
-                Velocity = Velocity * new Vector2(1.1f, 1.1f);
+                Velocity = Velocity * VelocityModifier;
                 //remove
                 //Goal!!
                 //Ball.Kill()
@@ -55,7 +56,7 @@ namespace Pong
             if (Position.X <= 0)
             {
                 Velocity.X = -Velocity.X;
-                Velocity = Velocity * new Vector2(1.1f, 1.1f);
+                Velocity = Velocity * VelocityModifier;
                 //remove
                 //Goal!!
                 //Ball.Kill()
@@ -63,7 +64,7 @@ namespace Pong
                 //Ball.Respawn()
             }
             //Collision with platform
-            
+
         }
     }
 }
