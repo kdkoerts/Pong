@@ -22,7 +22,7 @@ namespace Pong
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class Game : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -33,7 +33,7 @@ namespace Pong
         public static int SchreenWith;
 
 
-        public Game1()
+        public Game()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -77,8 +77,11 @@ namespace Pong
 
             //The sprites for the platforms
             PlatformLeft.sprite = Content.Load<Texture2D>("blauweSpeler.png");
+            PlatformLeft.ResolutionFactor = new Vector2(Game.SchreenWith - PlatformLeft.sprite.Width, Game.SchreenHeight - PlatformLeft.sprite.Height);
             PlatformRight.sprite = Content.Load<Texture2D>("rodeSpeler.png");
+            PlatformRight.ResolutionFactor = new Vector2(Game.SchreenWith - PlatformRight.sprite.Width, Game.SchreenHeight - PlatformRight.sprite.Height);
             Ball.sprite = Content.Load<Texture2D>("bal.png");
+            Ball.ResolutionFactor = new Vector2(Game.SchreenWith - Ball.sprite.Width, Game.SchreenHeight - Ball.sprite.Height);
             
         }
 

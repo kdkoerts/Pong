@@ -17,6 +17,7 @@ namespace Pong
         public float MaxVelocity;
         public Texture2D sprite;
         public Vector2 VelocityModifier = new Vector2(1f, 1f);
+        public Vector2 ResolutionFactor; //Value given on LoadContent
 
         public void Draw(SpriteBatch spritebatch)
         {
@@ -24,13 +25,13 @@ namespace Pong
             //The pixel position is mapped from the (0 to 1) float value with a ConversionFactor
             //wich is created with the schreen resolution and the sprite size
             Vector2 SpritePosition;
-            Vector2 ResolutionFactor = new Vector2(Game1.SchreenWith - sprite.Width, Game1.SchreenHeight - sprite.Height);
-
+            
             SpritePosition = Position * ResolutionFactor;
 
             spritebatch.Draw(sprite, SpritePosition); //Vector2 pos in pixels from top left.
 
         }
+
         public void ColisionHandeler() //Check and handle a collision.
         {
             if (Position.Y <= 0)
@@ -45,9 +46,9 @@ namespace Pong
             }
             if (Position.X >= 1)
             {
-                Velocity.X = -Velocity.X;
-                Velocity = Velocity * VelocityModifier;
-                //remove
+                Velocity.X = -Velocity.X;                   //remove
+                Velocity = Velocity * VelocityModifier;     //remove
+
                 //Goal!!
                 //Ball.Kill()
                 //Score.Update()
@@ -55,15 +56,15 @@ namespace Pong
             }
             if (Position.X <= 0)
             {
-                Velocity.X = -Velocity.X;
-                Velocity = Velocity * VelocityModifier;
-                //remove
+                Velocity.X = -Velocity.X;                   //remove
+                Velocity = Velocity * VelocityModifier;     //remove
+
                 //Goal!!
                 //Ball.Kill()
                 //Score.Update()
                 //Ball.Respawn()
             }
-            //Collision with platform
+            //Collision with platform should go here?
 
         }
     }
