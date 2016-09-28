@@ -49,20 +49,16 @@ namespace Pong
                 Velocity.X = -Velocity.X;                   //remove
                 Velocity = Velocity * VelocityModifier;     //remove
 
-                //Goal!!
-                //Ball.Kill()
-                //Score.Update()
-                //Ball.Respawn()
+                Game.LivesRight--;    //deduct a life
+                spawn()
             }
             if (Position.X <= 0)
             {
                 Velocity.X = -Velocity.X;                   //remove
                 Velocity = Velocity * VelocityModifier;     //remove
 
-                //Goal!!
-                //Ball.Kill()
-                //Score.Update()
-                //Ball.Respawn()
+                Game.LivesLeft--;
+                spawn()
             }
             //Collision with platform should go here?
 

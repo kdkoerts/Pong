@@ -12,6 +12,7 @@ namespace Pong
         public Keys ControlUp;
         public Keys ControlDown;
 
+
         public void Move() //Actually does all update stuff including user input
         {
             if (Keyboard.GetState().IsKeyDown(ControlUp))
