@@ -23,5 +23,10 @@ namespace Pong
 
 
         }
+        void Spawn()
+        {
+            Position = new Vector2(0.5f, 0.5f);
+            Velocity = new Vector2(0.05f, 0.05f);
+        }
     }
 }

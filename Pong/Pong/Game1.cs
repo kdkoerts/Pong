@@ -75,6 +75,7 @@ namespace Pong
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+
             //The sprites for the platforms
             PlatformLeft.sprite = Content.Load<Texture2D>("blauweSpeler.png");
             PlatformLeft.ResolutionFactor = new Vector2(Game.SchreenWith - PlatformLeft.sprite.Width, Game.SchreenHeight - PlatformLeft.sprite.Height);
@@ -106,6 +107,8 @@ namespace Pong
             //exit on pressing escape
 
             //Move / update the platforms
+          //  if (!title.Visible)
+          //      base.Update(gameTime);
             PlatformLeft.Move();
             PlatformRight.Move();
             Ball.Update();
@@ -123,6 +126,8 @@ namespace Pong
             GraphicsDevice.Clear(Color.Black); //replace previous image with background color
             spriteBatch.Begin();
             base.Draw(gameTime);
+
+            //spriteBatch.DrawString(
 
 
             //Draw the items with their draw functions
