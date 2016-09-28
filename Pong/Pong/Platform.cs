@@ -7,7 +7,7 @@ namespace Pong
     public class platform : GameObject
     {
         
-        public new float MaxVelocity = 0.005f;
+        public new float MaxVelocity = 50f;
         //public Texture2D sprite;
         public Keys ControlUp;
         public Keys ControlDown;

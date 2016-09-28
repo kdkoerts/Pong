@@ -19,14 +19,11 @@ namespace Pong
         {
             Position = Position + Velocity;
             ColisionHandeler();
-
-
-
         }
         void Spawn()
         {
-            Position = new Vector2(0.5f, 0.5f);
-            Velocity = new Vector2(0.005f, 0f);
+            Position = new Vector2(110f, 110f);
+            Velocity = new Vector2(20f, 20f);
         }
 
         public void ColisionHandeler() //Check and handle a collision.
@@ -36,12 +33,12 @@ namespace Pong
                 Velocity.Y = -Velocity.Y;
                 Velocity = Velocity * VelocityModifier; //add speed on collision
             }
-            if (Position.Y >= 1)
+            if (Position.Y >= Game.SchreenHeight)
             {
                 Velocity.Y = -Velocity.Y;
                 Velocity = Velocity * VelocityModifier;
             }
-            if (Position.X >= 1)
+            if (Position.X >= Game.SchreenWith)
             {
                 Velocity.X = -Velocity.X;                   //remove
                 Velocity = Velocity * VelocityModifier;     //remove
@@ -81,15 +78,6 @@ namespace Pong
 
 
             }
-
-
-
-
-
-
-
-
-
-        }
+         }
     }
 }
