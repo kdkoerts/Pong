@@ -16,23 +16,11 @@ namespace Pong
         public Vector2 Velocity;
         public float MaxVelocity;
         public Texture2D sprite;
-        public Vector2 VelocityModifier = new Vector2(1f, 1f);
-        public Vector2 ResolutionFactor; //Value given on LoadContent
+        public Vector2 VelocityModifier = new Vector2(1.05f, 1.05f);
 
         public void Draw(SpriteBatch spritebatch)
         {
-            //draw the Sprite from float 0-1 position
-            //The pixel position is mapped from the (0 to 1) float value with a ConversionFactor
-            //wich is created with the schreen resolution and the sprite size
-            
-            //Vector2 SpritePosition;
-            
-            //SpritePosition = Position; * ResolutionFactor;
-
             spritebatch.Draw(sprite, Position); //Vector2 pos in pixels from top left.
-
-        }
-
-        
+        }        
     }
 }

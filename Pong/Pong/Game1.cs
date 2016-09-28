@@ -61,7 +61,7 @@ namespace Pong
             PlatformRight.ControlUp = Keys.Up;
             PlatformRight.ControlDown = Keys.Down;
             PongBall.Position = new Vector2(SchreenWith / 2 , SchreenHeight / 2);
-            PongBall.Velocity = new Vector2(0.5f, -0.5f);
+            PongBall.Velocity = new Vector2(1f, -0.5f);
             //Ball.speed = ()
             
 
@@ -76,16 +76,11 @@ namespace Pong
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-
             //The sprites for the platforms
             PlatformLeft.sprite = Content.Load<Texture2D>("blauweSpeler.png");
-            //PlatformLeft.ResolutionFactor = new Vector2(Game.SchreenWith - PlatformLeft.sprite.Width, Game.SchreenHeight - PlatformLeft.sprite.Height);
             PlatformRight.sprite = Content.Load<Texture2D>("rodeSpeler.png");
             PlatformRight.Position.X = SchreenWith - PlatformRight.sprite.Width;
-            //PlatformRight.ResolutionFactor = new Vector2(Game.SchreenWith - PlatformRight.sprite.Width, Game.SchreenHeight - PlatformRight.sprite.Height);
             PongBall.sprite = Content.Load<Texture2D>("bal.png");
-            //PongBall.ResolutionFactor = new Vector2(Game.SchreenWith - PongBall.sprite.Width, Game.SchreenHeight - PongBall.sprite.Height);
             
         }
 
@@ -121,8 +116,8 @@ namespace Pong
             //Move / update the platforms
           //  if (!title.Visible)
           //      base.Update(gameTime);
-            PlatformLeft.Move();
-            PlatformRight.Move();
+            PlatformLeft.Update();
+            PlatformRight.Update();
             PongBall.Update();
 
 
