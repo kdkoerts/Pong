@@ -26,9 +26,9 @@ namespace Pong
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        platform PlatformRight = new platform();
-        platform PlatformLeft = new platform();
-        Ball Ball = new Ball();
+        public static platform PlatformRight = new platform();
+        public static platform PlatformLeft = new platform();
+        public static Ball PongBall = new Ball();
         public static int SchreenHeight;
         public static int SchreenWith;
         public static int LivesLeft = 5;
@@ -60,8 +60,8 @@ namespace Pong
             PlatformRight.Position.X= 1f;
             PlatformRight.ControlUp = Keys.Up;
             PlatformRight.ControlDown = Keys.Down;
-            Ball.Position = new Vector2(0.1f, 0.5f);
-            Ball.Velocity = new Vector2(0.005f, -0.005f);
+            PongBall.Position = new Vector2(0.1f, 0.5f);
+            PongBall.Velocity = new Vector2(0.005f, -0.005f);
             //Ball.speed = ()
             
 
@@ -83,8 +83,8 @@ namespace Pong
             PlatformLeft.ResolutionFactor = new Vector2(Game.SchreenWith - PlatformLeft.sprite.Width, Game.SchreenHeight - PlatformLeft.sprite.Height);
             PlatformRight.sprite = Content.Load<Texture2D>("rodeSpeler.png");
             PlatformRight.ResolutionFactor = new Vector2(Game.SchreenWith - PlatformRight.sprite.Width, Game.SchreenHeight - PlatformRight.sprite.Height);
-            Ball.sprite = Content.Load<Texture2D>("bal.png");
-            Ball.ResolutionFactor = new Vector2(Game.SchreenWith - Ball.sprite.Width, Game.SchreenHeight - Ball.sprite.Height);
+            PongBall.sprite = Content.Load<Texture2D>("bal.png");
+            PongBall.ResolutionFactor = new Vector2(Game.SchreenWith - PongBall.sprite.Width, Game.SchreenHeight - PongBall.sprite.Height);
             
         }
 
@@ -122,7 +122,7 @@ namespace Pong
           //      base.Update(gameTime);
             PlatformLeft.Move();
             PlatformRight.Move();
-            Ball.Update();
+            PongBall.Update();
 
 
             base.Update(gameTime);
@@ -144,7 +144,7 @@ namespace Pong
             //Draw the items with their draw functions
             PlatformLeft.Draw(spriteBatch);
             PlatformRight.Draw(spriteBatch);
-            Ball.Draw(spriteBatch);
+            PongBall.Draw(spriteBatch);
 
             spriteBatch.End();
         }
