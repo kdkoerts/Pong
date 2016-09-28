@@ -22,8 +22,8 @@ namespace Pong
         }
         void Spawn()
         {
-            Position = new Vector2(110f, 110f);
-            Velocity = new Vector2(20f, 20f);
+            Position = new Vector2(Game.SchreenWith / 2 , Game.SchreenHeight / 2);
+            Velocity = new Vector2(5f, 0f);
         }
 
         public void ColisionHandeler() //Check and handle a collision.
@@ -33,12 +33,12 @@ namespace Pong
                 Velocity.Y = -Velocity.Y;
                 Velocity = Velocity * VelocityModifier; //add speed on collision
             }
-            if (Position.Y >= Game.SchreenHeight)
+            if (Position.Y >= Game.SchreenHeight - sprite.Height)
             {
                 Velocity.Y = -Velocity.Y;
                 Velocity = Velocity * VelocityModifier;
             }
-            if (Position.X >= Game.SchreenWith)
+            if (Position.X >= Game.SchreenWith - sprite.Width)
             {
                 Velocity.X = -Velocity.X;                   //remove
                 Velocity = Velocity * VelocityModifier;     //remove

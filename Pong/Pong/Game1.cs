@@ -57,11 +57,11 @@ namespace Pong
             PlatformLeft.Position.X = 0;
             PlatformLeft.ControlUp = Keys.W;
             PlatformLeft.ControlDown = Keys.S;
-            PlatformRight.Position.X= SchreenWith;
+            
             PlatformRight.ControlUp = Keys.Up;
             PlatformRight.ControlDown = Keys.Down;
             PongBall.Position = new Vector2(SchreenWith / 2 , SchreenHeight / 2);
-            PongBall.Velocity = new Vector2(0.05f, -0.5f);
+            PongBall.Velocity = new Vector2(0.5f, -0.5f);
             //Ball.speed = ()
             
 
@@ -82,6 +82,7 @@ namespace Pong
             PlatformLeft.sprite = Content.Load<Texture2D>("blauweSpeler.png");
             //PlatformLeft.ResolutionFactor = new Vector2(Game.SchreenWith - PlatformLeft.sprite.Width, Game.SchreenHeight - PlatformLeft.sprite.Height);
             PlatformRight.sprite = Content.Load<Texture2D>("rodeSpeler.png");
+            PlatformRight.Position.X = SchreenWith - PlatformRight.sprite.Width;
             //PlatformRight.ResolutionFactor = new Vector2(Game.SchreenWith - PlatformRight.sprite.Width, Game.SchreenHeight - PlatformRight.sprite.Height);
             PongBall.sprite = Content.Load<Texture2D>("bal.png");
             //PongBall.ResolutionFactor = new Vector2(Game.SchreenWith - PongBall.sprite.Width, Game.SchreenHeight - PongBall.sprite.Height);

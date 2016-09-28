@@ -7,7 +7,7 @@ namespace Pong
     public class platform : GameObject
     {
         
-        public new float MaxVelocity = 50f;
+        public new float MaxVelocity = 1f;
         //public Texture2D sprite;
         public Keys ControlUp;
         public Keys ControlDown;
@@ -24,7 +24,7 @@ namespace Pong
             }
             if (Keyboard.GetState().IsKeyDown(ControlDown))
             {
-                if (Position.Y <= 1)
+                if (Position.Y <= Game.SchreenHeight - sprite.Height)
                 {
                     Position.Y = Position.Y + MaxVelocity;
                 }
