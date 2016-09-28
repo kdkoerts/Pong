@@ -31,6 +31,8 @@ namespace Pong
         Ball Ball = new Ball();
         public static int SchreenHeight;
         public static int SchreenWith;
+        public static int LivesLeft = 5;
+        public static int LivesRight = 5;
 
 
         public Game()
@@ -105,6 +107,15 @@ namespace Pong
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             //exit on pressing escape
+            if (LivesRight < 0)
+            {
+                //Player Right is Dead
+                //Do end of match stuff
+            }
+            if (LivesLeft < 0)
+            {
+                //Player Left is Dead
+            }
 
             //Move / update the platforms
           //  if (!title.Visible)
