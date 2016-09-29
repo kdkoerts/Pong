@@ -11,37 +11,31 @@ namespace Pong
 {
     public class Ball : GameObject
     {
-        //public Vector2 Position;
-        //public Vector2 Speed;
-        //public Texture2D sprite;
-
         public void Update()
         {
             Position = Position + Velocity;
             ColisionHandeler();
-
-
-
         }
         void Spawn()
         {
-            Position = new Vector2(0.5f, 0.5f);
-            Velocity = new Vector2(0.005f, 0f);
+            Position = new Vector2(Game.SchreenWith / 2 , Game.SchreenHeight / 2);
+            Velocity = new Vector2(5f, 0f);
         }
 
         public void ColisionHandeler() //Check and handle a collision.
         {
+            
             if (Position.Y <= 0)
             {
                 Velocity.Y = -Velocity.Y;
                 Velocity = Velocity * VelocityModifier; //add speed on collision
             }
-            if (Position.Y >= 1)
+            else if (Position.Y >= Game.SchreenHeight - sprite.Height) //if it collides with one side it wont with the other
             {
                 Velocity.Y = -Velocity.Y;
                 Velocity = Velocity * VelocityModifier;
             }
-            if (Position.X >= 1)
+            if (Position.X >= Game.SchreenWith - sprite.Width)
             {
                 Velocity.X = -Velocity.X;                   //remove
                 Velocity = Velocity * VelocityModifier;     //remove
@@ -49,7 +43,7 @@ namespace Pong
                 Game.LivesRight--;    //deduct a life
                 Spawn();
             }
-            if (Position.X <= 0)
+            else if (Position.X <= 0)   //if it collides with one side it wont with the other
             {
                 Velocity.X = -Velocity.X;                   //remove
                 Velocity = Velocity * VelocityModifier;     //remove
@@ -57,38 +51,37 @@ namespace Pong
                 Game.LivesLeft--;
                 Spawn();
             }
-            //Collision with platform should go here?
+            //#########################################################################
+            //Check For platform Collision
+            //Get easy acces to nececary variables
+            Vector2 PRP = Game.PlatformRight.Position;
+            Vector2 PLP = Game.PlatformLeft.Position;
+            int PRH = Game.PlatformRight.sprite.Height;
+            int PLH = Game.PlatformLeft.sprite.Height;
+            int PRW = Game.PlatformRight.sprite.Width;
+            int PLW = Game.PlatformLeft.sprite.Width;
+            //Max upward angle deflexion at Position + sprite.height = P(R?L)P
+            //Max downward angle deflection at Position = P(R?L)P + P(L?R)H
+            //No angle deflection at Position + sprite.Height / 2 = P(LR)P + p(L?R)H / 2
 
-            float xR = Game.PlatformRight.sprite.Width;
-            float yR = Game.PlatformRight.sprite.Height;
-            Vector2 OffsetR = new Vector2(2/yR, 2/xR);
-
-            if ((Position.X >= Game.PlatformRight.Position.X - OffsetR.X && Position.X <= Game.PlatformRight.Position.X + OffsetR.X) &&
-                (Position.Y >= Game.PlatformRight.Position.Y - OffsetR.Y && Position.Y <= Game.PlatformRight.Position.Y + OffsetR.Y))
+            //Collision Left || Right
+            if ((  Position.Y < PLP.Y + PLH && Position.Y + sprite.Height > PLP.Y && Position.X < PLP.X + PLW  )||
+                (  Position.Y < PRP.Y + PRH && Position.Y + sprite.Height > PRP.Y && Position.X + sprite.Width > PRP.X  ))
             {
-                float speed = (float) Math.Sqrt((Math.Pow(Velocity.X, 2)) + Math.Pow(Velocity.Y, 2));
-
-
-            }
-
-            float xL = Game.PlatformLeft.sprite.Width;
-            float yL = Game.PlatformLeft.sprite.Height;
-            Vector2 OffsetL = new Vector2(2/yL, 2/xL);
-            if ((Position.X >= Game.PlatformLeft.Position.X - OffsetL.X && Position.X <= Game.PlatformLeft.Position.X + OffsetL.X) &&
-               (Position.Y >= Game.PlatformLeft.Position.Y - OffsetL.Y && Position.Y <= Game.PlatformLeft.Position.Y + OffsetL.Y))
-            {
+                //Bounce
                 Velocity.X = -Velocity.X;
-
-
+                Velocity = Velocity * VelocityModifier; //add speed on collision
             }
 
-
-
-
-
-
-
-
+            /*
+            //Collision Right
+            if (Position.Y < PRP.Y + PRH && Position.Y + sprite.Height > PRP.Y && Position.X + sprite.Width > PRP.X)
+            {
+                //Bounce
+                Velocity.X = -Velocity.X;
+                Velocity = Velocity * VelocityModifier; //add speed on collision
+            }
+            */
 
         }
     }
