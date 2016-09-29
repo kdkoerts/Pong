@@ -26,13 +26,14 @@ namespace Pong
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        private SpriteFont font;
         platform PlatformRight = new platform();
         platform PlatformLeft = new platform();
         Ball Ball = new Ball();
         public static int SchreenHeight;
         public static int SchreenWith;
-        public static int LivesLeft = 5;
-        public static int LivesRight = 5;
+        public static int LivesLeft = 3;
+        public static int LivesRight = 3;
 
 
         public Game()
@@ -62,7 +63,6 @@ namespace Pong
             PlatformRight.ControlDown = Keys.Down;
             Ball.Position = new Vector2(0.1f, 0.5f);
             Ball.Velocity = new Vector2(0.005f, -0.005f);
-            //Ball.speed = ()
             
 
             base.Initialize();
@@ -77,6 +77,8 @@ namespace Pong
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            //Load Font
+            font = Content.Load<SpriteFont>("miramob");
 
             //The sprites for the platforms
             PlatformLeft.sprite = Content.Load<Texture2D>("blauweSpeler.png");
@@ -107,6 +109,10 @@ namespace Pong
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             //exit on pressing escape
+
+
+
+
             if (LivesRight < 0)
             {
                 //Player Right is Dead
@@ -117,7 +123,7 @@ namespace Pong
                 //Player Left is Dead
             }
 
-            //Move / update the platforms
+            //Move / update the platformsr
           //  if (!title.Visible)
           //      base.Update(gameTime);
             PlatformLeft.Move();
@@ -138,7 +144,7 @@ namespace Pong
             spriteBatch.Begin();
             base.Draw(gameTime);
 
-            //spriteBatch.DrawString(
+            spriteBatch.DrawString(font, "Press Space to Start.", new Vector2(100, 100), Color.White);
 
 
             //Draw the items with their draw functions

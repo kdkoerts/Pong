@@ -31,37 +31,5 @@ namespace Pong
             spritebatch.Draw(sprite, SpritePosition); //Vector2 pos in pixels from top left.
 
         }
-
-        public void ColisionHandeler() //Check and handle a collision.
-        {
-            if (Position.Y <= 0)
-            {
-                Velocity.Y = -Velocity.Y;
-                Velocity = Velocity * VelocityModifier; //add speed on collision
-            }
-            if (Position.Y >= 1)
-            {
-                Velocity.Y = -Velocity.Y;
-                Velocity = Velocity * VelocityModifier;
-            }
-            if (Position.X >= 1)
-            {
-                Velocity.X = -Velocity.X;                   //remove
-                Velocity = Velocity * VelocityModifier;     //remove
-
-                Game.LivesRight--;    //deduct a life
-                spawn()
-            }
-            if (Position.X <= 0)
-            {
-                Velocity.X = -Velocity.X;                   //remove
-                Velocity = Velocity * VelocityModifier;     //remove
-
-                Game.LivesLeft--;
-                spawn()
-            }
-            //Collision with platform should go here?
-
-        }
     }
 }
