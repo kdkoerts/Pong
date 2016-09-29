@@ -24,12 +24,13 @@ namespace Pong
 
         public void ColisionHandeler() //Check and handle a collision.
         {
+            
             if (Position.Y <= 0)
             {
                 Velocity.Y = -Velocity.Y;
                 Velocity = Velocity * VelocityModifier; //add speed on collision
             }
-            if (Position.Y >= Game.SchreenHeight - sprite.Height)
+            else if (Position.Y >= Game.SchreenHeight - sprite.Height) //if it collides with one side it wont with the other
             {
                 Velocity.Y = -Velocity.Y;
                 Velocity = Velocity * VelocityModifier;
@@ -42,7 +43,7 @@ namespace Pong
                 Game.LivesRight--;    //deduct a life
                 Spawn();
             }
-            if (Position.X <= 0)
+            else if (Position.X <= 0)   //if it collides with one side it wont with the other
             {
                 Velocity.X = -Velocity.X;                   //remove
                 Velocity = Velocity * VelocityModifier;     //remove
@@ -59,14 +60,20 @@ namespace Pong
             int PLH = Game.PlatformLeft.sprite.Height;
             int PRW = Game.PlatformRight.sprite.Width;
             int PLW = Game.PlatformLeft.sprite.Width;
-            //Collision Left
-            if (Position.Y < PLP.Y + PLH && Position.Y + sprite.Height > PLP.Y && Position.X < PLP.X + PLW)
+            //Max upward angle deflexion at Position + sprite.height = P(R?L)P
+            //Max downward angle deflection at Position = P(R?L)P + P(L?R)H
+            //No angle deflection at Position + sprite.Height / 2 = P(LR)P + p(L?R)H / 2
+
+            //Collision Left || Right
+            if ((  Position.Y < PLP.Y + PLH && Position.Y + sprite.Height > PLP.Y && Position.X < PLP.X + PLW  )||
+                (  Position.Y < PRP.Y + PRH && Position.Y + sprite.Height > PRP.Y && Position.X + sprite.Width > PRP.X  ))
             {
                 //Bounce
                 Velocity.X = -Velocity.X;
                 Velocity = Velocity * VelocityModifier; //add speed on collision
             }
 
+            /*
             //Collision Right
             if (Position.Y < PRP.Y + PRH && Position.Y + sprite.Height > PRP.Y && Position.X + sprite.Width > PRP.X)
             {
@@ -74,6 +81,7 @@ namespace Pong
                 Velocity.X = -Velocity.X;
                 Velocity = Velocity * VelocityModifier; //add speed on collision
             }
+            */
 
         }
     }
