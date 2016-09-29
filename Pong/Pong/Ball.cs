@@ -16,7 +16,7 @@ namespace Pong
             Position = Position + Velocity;
             ColisionHandeler();
         }
-        void Spawn()
+        public void Spawn()
         {
             Position = new Vector2(Game.SchreenWith / 2 , Game.SchreenHeight / 2);
             Velocity = new Vector2(5f, 0f);
@@ -37,17 +37,11 @@ namespace Pong
             }
             if (Position.X >= Game.SchreenWith - sprite.Width)
             {
-                Velocity.X = -Velocity.X;                   //remove
-                Velocity = Velocity * VelocityModifier;     //remove
-
                 Game.LivesRight--;    //deduct a life
                 Spawn();
             }
             else if (Position.X <= 0)   //if it collides with one side it wont with the other
             {
-                Velocity.X = -Velocity.X;                   //remove
-                Velocity = Velocity * VelocityModifier;     //remove
-
                 Game.LivesLeft--;
                 Spawn();
             }
@@ -78,6 +72,7 @@ namespace Pong
                     CPP = PRP;
                     CPW = PRW;
                     CPH = PRH;
+                    Position.X = Game.SchreenWith - CPW - sprite.Width;
                 }
                 else
                 {
@@ -86,6 +81,7 @@ namespace Pong
                     CPW = PLW;
                     CPH = PLH;
                     speed = speed * -1;
+                    Position.X = CPW;
                 }
                 //Find Relative position
                 Vector2 RelativePos = new Vector2();
@@ -95,23 +91,12 @@ namespace Pong
                 float exitAngle = (RelativePos.Y / MaxRelativePos) * 90; //Could cause problems in extreme cases (platform edges) TO BE TESTED
 
                 Velocity.X = speed * (float)Math.Cos(exitAngle);
-                Velocity.Y = speed * (float)Math.Cos(exitAngle);                   
+                Velocity.Y = speed * (float)Math.Sin(exitAngle);                   
 
 
                 Velocity = Velocity * VelocityModifier; //add speed on collision
                 if (Velocity.X == 0 && Velocity.Y == 0) Spawn();
             }
-
-            /*
-            //Collision Right: Merged into previous if(){}
-            if (Position.Y < PRP.Y + PRH && Position.Y + sprite.Height > PRP.Y && Position.X + sprite.Width > PRP.X)
-            {
-                //Bounce
-                Velocity.X = -Velocity.X;
-                Velocity = Velocity * VelocityModifier; //add speed on collision
-            }
-            */
-
         }
     }
 }

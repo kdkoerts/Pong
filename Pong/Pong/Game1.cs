@@ -102,6 +102,7 @@ namespace Pong
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            if (Keyboard.GetState().IsKeyDown(Keys.R)) PongBall.Spawn();
             //exit on pressing escape
             if (LivesRight < 0)
             {
