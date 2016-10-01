@@ -19,7 +19,7 @@ namespace Pong
         public void Spawn()
         {
             Position = new Vector2(Game.SchreenWith / 2 , Game.SchreenHeight / 2);
-            Velocity = new Vector2(5f, 0f);
+            Velocity = new Vector2(-5f, 0f);
         }
 
         public void ColisionHandeler() //Check and handle a collision.
@@ -67,6 +67,8 @@ namespace Pong
                 int CPW;
                 int CPH;
                 float speed = (float)Math.Sqrt(Math.Pow(Velocity.X, 2) + Math.Pow(Velocity.Y, 2));
+                float xmod = 1;
+                float ymod = 1;
                 if (Position.X > Game.SchreenWith / 2) //wich side are we on?
                 {
                     //Right Side
@@ -74,6 +76,8 @@ namespace Pong
                     CPW = PRW;
                     CPH = PRH;
                     Position.X = Game.SchreenWith - CPW - sprite.Width;
+                    xmod = -1f;
+                    ymod = -1f;
                 }
                 else
                 {
@@ -81,18 +85,19 @@ namespace Pong
                     CPP = PLP;
                     CPW = PLW;
                     CPH = PLH;
-                    speed = speed * -1;
+                    //speed = speed * -1;
                     Position.X = CPW;
+                    ymod = -1;
                 }
                 //Find Relative position
                 Vector2 RelativePos = new Vector2();
-                RelativePos = new Vector2((Position.X + sprite.Width / 2) - (CPP.X + CPW / 2), (Position.Y + sprite.Height / 2) - (CPP.Y + CPH / 2)); //This Fucks Up somehow
-                float MaxRelativePos = CPH / 2 + sprite.Height;
+                RelativePos = new Vector2((CPP.X + CPW / 2) - (Position.X + sprite.Width / 2), (CPP.Y + CPH / 2) - (Position.Y + sprite.Height / 2)); //This works
+                float MaxRelativePos = CPH + sprite.Height;
                 //float entryAngle = 
                 float exitAngle = (RelativePos.Y / MaxRelativePos) * ((1) * (float)Math.PI); //Could cause problems in extreme cases (platform edges) TO BE TESTED
 
-                Velocity.X = speed * (float)Math.Sin(exitAngle);
-                Velocity.Y = speed * (float)Math.Cos(exitAngle);                   
+                Velocity.X = xmod * speed * (float)Math.Cos(exitAngle);
+                Velocity.Y = ymod * speed * (float)Math.Sin(exitAngle);                   
 
 
                 Velocity = Velocity * VelocityModifier; //add speed on collision
