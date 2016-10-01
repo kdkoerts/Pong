@@ -41,7 +41,8 @@ namespace Pong
         public bool startup = true;
         public int ScoreRight = 0;
         public int ScoreLeft = 0;
-
+        public bool RedWins = false;
+        public bool BlueWins = false;
 
         public Game()
         {
@@ -114,22 +115,25 @@ namespace Pong
             {//Restart the game
                 title = false;
                 startup = false;
-                LivesLeft = 5;
-                LivesRight = 5;
+                BlueWins = false;
+                RedWins = false;
             }
 
             if (LivesRight <= 0)
             {
                 title = true;
-                ScoreLeft += 1;
-                //Player Right is Dead
-                //Do end of match stuff
+                ScoreLeft++;
+                LivesLeft = 5;
+                LivesRight = 5;
+                BlueWins = true;
             }
             if (LivesLeft <= 0)
             {
                 title = true;
-                ScoreRight += 1;
-                //Player Left is Dead
+                ScoreRight++;
+                LivesLeft = 5;
+                LivesRight = 5;
+                RedWins = true;
             }
 
             if (title == false)
@@ -152,15 +156,15 @@ namespace Pong
             base.Draw(gameTime);
             if (startup == true)
             {
-                spriteBatch.DrawString(font, "Welcome to Pong! \n Press Space to Start.", new Vector2(250, 200), Color.White);
+                spriteBatch.DrawString(font, "Welcome to Pong! \nPress Space to Start.", new Vector2(300, 200), Color.White);
             }
-            if (LivesLeft <= 0)
+            if (RedWins)
             {
-                spriteBatch.DrawString(font, "Red WINS!.", new Vector2(250, 200), Color.White);
+                spriteBatch.DrawString(font, "           Red WINS! \n Press Space to star again", new Vector2(300, 200), Color.White);
             }
-            if (LivesRight <= 0)
+            if (BlueWins)
             {
-                spriteBatch.DrawString(font, "Blue WINS!.", new Vector2(250, 200), Color.White);
+                spriteBatch.DrawString(font, "           Blue WINS!\n Press Space to star again", new Vector2(300, 200), Color.White);
             }
             if (title == false)
             {
