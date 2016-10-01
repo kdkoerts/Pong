@@ -23,8 +23,7 @@ namespace Pong
         }
 
         public void ColisionHandeler() //Check and handle a collision.
-        {
-            
+        {            
             if (Position.Y <= 0)
             {
                 Velocity.Y = -Velocity.Y;
@@ -83,7 +82,6 @@ namespace Pong
                     CPP = PLP;
                     CPW = PLW;
                     CPH = PLH;
-                    //speed = speed * -1;
                     Position.X = CPW;
                 }
                 //Find Relative position
@@ -94,8 +92,7 @@ namespace Pong
                 float exitAngle = (RelativePos.Y / MaxRelativePos) * ((1) * (float)Math.PI); //Could cause problems in extreme cases (platform edges) TO BE TESTED
 
                 Velocity.X = xmod * speed * (float)Math.Cos(exitAngle);
-                Velocity.Y = -speed * (float)Math.Sin(exitAngle);                   
-
+                Velocity.Y = -speed * (float)Math.Sin(exitAngle);
 
                 Velocity = Velocity * VelocityModifier; //add speed on collision
                 if (Velocity.X == 0 && Velocity.Y == 0) Spawn();
