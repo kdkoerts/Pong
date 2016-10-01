@@ -11,6 +11,7 @@ namespace Pong
 {
     public class Ball : GameObject
     {
+        public static float StartSpeed = 5;
         public void Update()
         {
             Position = Position + Velocity;
@@ -19,9 +20,9 @@ namespace Pong
         public void Spawn() //Spawn the Ball 
         {
             Position = new Vector2(Game.SchreenWith / 2 - sprite.Height /2, Game.SchreenHeight / 2 - sprite.Height / 2);
-            int r = Game.Random.Next(0, 2);
-            if ( r == 1) Velocity = new Vector2(-5f, 0f);
-            else Velocity = new Vector2(5f, 0f);
+            float r = (float)Game.Random.NextDouble() * 2 * (float)Math.PI;
+            Velocity.X = StartSpeed * (float)Math.Cos(r);
+            Velocity.Y = StartSpeed * (float)Math.Sin(r);
         }
 
         public void ColisionHandeler() //Check and handle a collision.
