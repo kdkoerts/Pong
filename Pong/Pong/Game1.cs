@@ -24,13 +24,12 @@ namespace Pong
         public static int LivesLeft = 5;
         public static int LivesRight = 5;
         public static Random Random = new Random(); //call .next() or .next (int minimum, int maximum)
-        public bool title = true;
-        public bool startup = true;
-        public int ScoreRight = 0;
+        public bool title = true;                   // A boolean to change the gamestate.
+        public bool startup = true;                 // A boolean to check if this is the boot gamestate.
+        public int ScoreRight = 0;                  // Score for match winner.
         public int ScoreLeft = 0;
-        public bool RedWins = false;
-        public bool BlueWins = false;
-
+        public bool RedWins = false;                // Booleans to update the score of the winning player.
+        public bool BlueWins = false;               
         public LivesHandeler LivesHandeler = new LivesHandeler();
         
         public Game()
@@ -54,12 +53,8 @@ namespace Pong
             PlatformLeft.Position.X = 0;
             PlatformLeft.ControlUp = Keys.W;
             PlatformLeft.ControlDown = Keys.S;
-            
             PlatformRight.ControlUp = Keys.Up;
             PlatformRight.ControlDown = Keys.Down;
-
-
-
             base.Initialize();
         }
 
@@ -71,17 +66,15 @@ namespace Pong
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            //The sprites for the platforms
+            //The sprites for the platforms, ball and lives
             PlatformLeft.sprite = Content.Load<Texture2D>("blauweSpeler.png");
-            PlatformRight.sprite = Content.Load<Texture2D>("rodeSpeler.png");
-            PlatformRight.Position.X = SchreenWith - PlatformRight.sprite.Width;
+            PlatformRight.sprite = Content.Load<Texture2D>("rodeSpeler.png");         
             PongBall.sprite = Content.Load<Texture2D>("bal.png");
-            font = Content.Load<SpriteFont>("Miramob");
             PlatformLeft.Position.Y = SchreenHeight / 2 - PlatformLeft.sprite.Height / 2;
             PlatformRight.Position.Y = SchreenHeight / 2 - PlatformRight.sprite.Height / 2;
-            PongBall.Spawn();
             LivesHandeler.sprite = Content.Load<Texture2D>("bal.png");
-
+            font = Content.Load<SpriteFont>("Miramob");
+            PlatformRight.Position.X = SchreenWith - PlatformRight.sprite.Width;    //Sets the X-Position of the right platform. We do this here cause this needs the sprite width.
         }
 
         /// <summary>
@@ -102,8 +95,6 @@ namespace Pong
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();     //exit on pressing escape
-            if (Keyboard.GetState().IsKeyDown(Keys.R)) PongBall.Spawn();
-
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {//Restart the game
                 title = false;
@@ -114,11 +105,11 @@ namespace Pong
 
             if (LivesRight <= 0)
             {
-                title = true;
-                ScoreLeft++;
-                LivesLeft = 5;
+                title = true;           // Sets the game state to title/gameover.
+                ScoreLeft++;            //Updates the Score
+                LivesLeft = 5;          // Sets the life back ready for the next game.
                 LivesRight = 5;
-                BlueWins = true;
+                BlueWins = true;        // Used to display who wins later on.
             }
             if (LivesLeft <= 0)
             {
@@ -129,7 +120,7 @@ namespace Pong
                 RedWins = true;
             }
 
-            if (title == false)
+            if (title == false)         // Used so that the game only starts after we press space(see line 98).
             {
                 PlatformLeft.Update();
                 PlatformRight.Update();
@@ -147,7 +138,7 @@ namespace Pong
             GraphicsDevice.Clear(Color.Black); //replace previous image with background colors
             spriteBatch.Begin();
             base.Draw(gameTime);
-            if (startup == true)
+            if (startup == true)  
             {
                 spriteBatch.DrawString(font, "Welcome to Pong! \nPress Space to Start.", new Vector2(300, 200), Color.White);
             }
