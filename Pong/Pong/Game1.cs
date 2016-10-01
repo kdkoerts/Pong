@@ -70,8 +70,6 @@ namespace Pong
             
             PlatformRight.ControlUp = Keys.Up;
             PlatformRight.ControlDown = Keys.Down;
-            //PongBall.Position = new Vector2(SchreenWith / 2 , SchreenHeight / 2);
-            //PongBall.Velocity = new Vector2(1f, -0.5f);
             PongBall.Spawn();
 
 
@@ -91,7 +89,7 @@ namespace Pong
             PlatformRight.sprite = Content.Load<Texture2D>("rodeSpeler.png");
             PlatformRight.Position.X = SchreenWith - PlatformRight.sprite.Width;
             PongBall.sprite = Content.Load<Texture2D>("bal.png");
-            font = Content.Load<SpriteFont>("Font");
+            font = Content.Load<SpriteFont>("Miramob");
 
         }
 
@@ -112,9 +110,9 @@ namespace Pong
         protected override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+                Exit();     //exit on pressing escape
             if (Keyboard.GetState().IsKeyDown(Keys.R)) PongBall.Spawn();
-            //exit on pressing escape
+            
             if (LivesRight < 0)
             {
                 //Player Right is Dead
