@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 /*
@@ -34,8 +36,10 @@ namespace Pong
         public static int SchreenWith;
         public static int LivesLeft = 5;
         public static int LivesRight = 5;
-        public static int ColisionsHandled;
-        public static void CollisionCounter()
+        public static Random Random = new Random(); //call .next() or .next (int minimum, int maximum)
+
+        public static int ColisionsHandled; //debug var
+        public static void CollisionCounter()//debug meth
         {
             ColisionsHandled++;
         }
@@ -66,9 +70,9 @@ namespace Pong
             
             PlatformRight.ControlUp = Keys.Up;
             PlatformRight.ControlDown = Keys.Down;
-            PongBall.Position = new Vector2(SchreenWith / 2 , SchreenHeight / 2);
-            PongBall.Velocity = new Vector2(1f, -0.5f);
-            //Ball.speed = ()
+            //PongBall.Position = new Vector2(SchreenWith / 2 , SchreenHeight / 2);
+            //PongBall.Velocity = new Vector2(1f, -0.5f);
+            PongBall.Spawn();
 
 
             base.Initialize();
