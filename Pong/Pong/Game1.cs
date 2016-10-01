@@ -26,6 +26,7 @@ namespace Pong
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        private SpriteFont font;
         public static platform PlatformRight = new platform();
         public static platform PlatformLeft = new platform();
         public static Ball PongBall = new Ball();
@@ -33,6 +34,11 @@ namespace Pong
         public static int SchreenWith;
         public static int LivesLeft = 5;
         public static int LivesRight = 5;
+        public static int ColisionsHandled;
+        public static void CollisionCounter()
+        {
+            ColisionsHandled++;
+        }
 
 
         public Game()
@@ -63,7 +69,7 @@ namespace Pong
             PongBall.Position = new Vector2(SchreenWith / 2 , SchreenHeight / 2);
             PongBall.Velocity = new Vector2(1f, -0.5f);
             //Ball.speed = ()
-            
+
 
             base.Initialize();
         }
@@ -81,7 +87,8 @@ namespace Pong
             PlatformRight.sprite = Content.Load<Texture2D>("rodeSpeler.png");
             PlatformRight.Position.X = SchreenWith - PlatformRight.sprite.Width;
             PongBall.sprite = Content.Load<Texture2D>("bal.png");
-            
+            font = Content.Load<SpriteFont>("Font");
+
         }
 
         /// <summary>
@@ -136,7 +143,7 @@ namespace Pong
             base.Draw(gameTime);
 
             //spriteBatch.DrawString(
-
+            spriteBatch.DrawString(font, ColisionsHandled.ToString(), new Vector2(100, 100), Color.White);
 
             //Draw the items with their draw functions
             PlatformLeft.Draw(spriteBatch);

@@ -62,6 +62,7 @@ namespace Pong
             if ((  Position.Y < PLP.Y + PLH && Position.Y + sprite.Height > PLP.Y && Position.X < PLP.X + PLW  )||
                 (  Position.Y < PRP.Y + PRH && Position.Y + sprite.Height > PRP.Y && Position.X + sprite.Width > PRP.X  ))
             {
+                Game.CollisionCounter();
                 Vector2 CPP;
                 int CPW;
                 int CPH;
@@ -85,10 +86,10 @@ namespace Pong
                 }
                 //Find Relative position
                 Vector2 RelativePos = new Vector2();
-                RelativePos = new Vector2((Position.X + sprite.Width / 2) - (CPP.X + CPW / 2), (Position.Y + sprite.Height / 2) - (CPP.Y + CPH / 2));
+                RelativePos = new Vector2((Position.X + sprite.Width / 2) - (CPP.X + CPW / 2), (Position.Y + sprite.Height / 2) - (CPP.Y + CPH / 2)); //This Fucks Up somehow
                 float MaxRelativePos = CPH / 2 + sprite.Height;
                 //float entryAngle = 
-                float exitAngle = (RelativePos.Y / MaxRelativePos) * (float)(1*Math.PI); //Could cause problems in extreme cases (platform edges) TO BE TESTED
+                float exitAngle = (RelativePos.Y / MaxRelativePos) * ((1) * (float)Math.PI); //Could cause problems in extreme cases (platform edges) TO BE TESTED
 
                 Velocity.X = speed * (float)Math.Sin(exitAngle);
                 Velocity.Y = speed * (float)Math.Cos(exitAngle);                   
