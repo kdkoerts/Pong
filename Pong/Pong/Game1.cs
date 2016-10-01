@@ -145,11 +145,11 @@ namespace Pong
             }
             if (RedWins)
             {
-                spriteBatch.DrawString(font, "           Red WINS! \n Press Space to star again", new Vector2(300, 200), Color.White);
+                spriteBatch.DrawString(font, "           Red WINS! \n Press Space to start again", new Vector2(300, 200), Color.White);
             }
             if (BlueWins)
             {
-                spriteBatch.DrawString(font, "           Blue WINS!\n Press Space to star again", new Vector2(300, 200), Color.White);
+                spriteBatch.DrawString(font, "           Blue WINS!\n Press Space to start again", new Vector2(300, 200), Color.White);
             }
             if (title == false)
             {
