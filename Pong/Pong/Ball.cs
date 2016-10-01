@@ -88,10 +88,10 @@ namespace Pong
                 RelativePos = new Vector2((Position.X + sprite.Width / 2) - (CPP.X + CPW / 2), (Position.Y + sprite.Height / 2) - (CPP.Y + CPH / 2));
                 float MaxRelativePos = CPH / 2 + sprite.Height;
                 //float entryAngle = 
-                float exitAngle = (RelativePos.Y / MaxRelativePos) * 90; //Could cause problems in extreme cases (platform edges) TO BE TESTED
+                float exitAngle = (RelativePos.Y / MaxRelativePos) * (float)(1*Math.PI); //Could cause problems in extreme cases (platform edges) TO BE TESTED
 
-                Velocity.X = speed * (float)Math.Cos(exitAngle);
-                Velocity.Y = speed * (float)Math.Sin(exitAngle);                   
+                Velocity.X = speed * (float)Math.Sin(exitAngle);
+                Velocity.Y = speed * (float)Math.Cos(exitAngle);                   
 
 
                 Velocity = Velocity * VelocityModifier; //add speed on collision
