@@ -38,12 +38,6 @@ namespace Pong
         public static int LivesRight = 5;
         public static Random Random = new Random(); //call .next() or .next (int minimum, int maximum)
 
-        public static int ColisionsHandled; //debug var
-        public static void CollisionCounter()//debug meth
-        {
-            ColisionsHandled++;
-        }
-
 
         public Game()
         {
@@ -51,7 +45,6 @@ namespace Pong
             Content.RootDirectory = "Content";
             
         }
-        //static resolution = graphics.windowsize;
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -122,10 +115,9 @@ namespace Pong
             {
                 //Player Left is Dead
             }
-
-            //Move / update the platforms
-          //  if (!title.Visible)
-          //      base.Update(gameTime);
+            
+            //if (!title.Visible)
+            //    base.Update(gameTime);
             PlatformLeft.Update();
             PlatformRight.Update();
             PongBall.Update();
@@ -143,9 +135,7 @@ namespace Pong
             GraphicsDevice.Clear(Color.Black); //replace previous image with background color
             spriteBatch.Begin();
             base.Draw(gameTime);
-
-            //spriteBatch.DrawString(
-            spriteBatch.DrawString(font, ColisionsHandled.ToString(), new Vector2(100, 100), Color.White);
+            
 
             //Draw the items with their draw functions
             PlatformLeft.Draw(spriteBatch);

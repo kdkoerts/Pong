@@ -60,7 +60,6 @@ namespace Pong
             if ((  Position.Y < PLP.Y + PLH && Position.Y + sprite.Height > PLP.Y && Position.X < PLP.X + PLW  )||
                 (  Position.Y < PRP.Y + PRH && Position.Y + sprite.Height > PRP.Y && Position.X + sprite.Width > PRP.X  ))
             {
-                Game.CollisionCounter();
                 Vector2 CPP;
                 int CPW;
                 int CPH;
