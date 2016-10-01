@@ -37,6 +37,7 @@ namespace Pong
         public static int LivesLeft = 5;
         public static int LivesRight = 5;
         public static Random Random = new Random(); //call .next() or .next (int minimum, int maximum)
+        public bool title = true;
 
 
         public Game()
@@ -105,25 +106,28 @@ namespace Pong
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();     //exit on pressing escape
             if (Keyboard.GetState().IsKeyDown(Keys.R)) PongBall.Spawn();
-            
-            if (LivesRight < 0)
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space)) title = false;
+
+            if (LivesRight <= 0)
             {
+                title = true;
                 //Player Right is Dead
                 //Do end of match stuff
             }
-            if (LivesLeft < 0)
+            if (LivesLeft <= 0)
             {
+                title = true;
                 //Player Left is Dead
             }
-            
-            //if (!title.Visible)
-            //    base.Update(gameTime);
-            PlatformLeft.Update();
-            PlatformRight.Update();
-            PongBall.Update();
 
-
-            base.Update(gameTime);
+            if (title == false)
+            {
+                PlatformLeft.Update();
+                PlatformRight.Update();
+                PongBall.Update();
+                base.Update(gameTime);
+            }
         }
 
         /// <summary>
@@ -132,16 +136,29 @@ namespace Pong
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black); //replace previous image with background color
+            GraphicsDevice.Clear(Color.Black); //replace previous image with background colors
             spriteBatch.Begin();
             base.Draw(gameTime);
-            
+            if (title == true)
+            {
+                spriteBatch.DrawString(font, "Welcome to Pong! \n Press Space to Start.", new Vector2(250, 200), Color.White);
+            }
+            if (LivesLeft <= 0)
+            {
+                spriteBatch.DrawString(font, "Red WINS!.", new Vector2(250, 200), Color.White);
+            }
+            if (LivesRight <= 0)
+            {
+                spriteBatch.DrawString(font, "Blue WINS!.", new Vector2(250, 200), Color.White);
+            }
+            if (title == false)
+            {
 
-            //Draw the items with their draw functions
-            PlatformLeft.Draw(spriteBatch);
-            PlatformRight.Draw(spriteBatch);
-            PongBall.Draw(spriteBatch);
-
+                //Draw the items with their draw functions
+                PlatformLeft.Draw(spriteBatch);
+                PlatformRight.Draw(spriteBatch);
+                PongBall.Draw(spriteBatch);
+            }
             spriteBatch.End();
         }
     }
