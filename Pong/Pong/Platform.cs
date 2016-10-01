@@ -8,7 +8,6 @@ namespace Pong
     {
         
         public new float MaxVelocity = 4f;
-        //public Texture2D sprite;
         public Keys ControlUp;
         public Keys ControlDown;
 

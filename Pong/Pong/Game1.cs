@@ -3,20 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-/*
 
-Add sound {
-    Joke(Tennis grunting Sound?) HIEASda
-}
-
-Add Fancy GFX {
-
-    Trails, Particles etc
-}
-
-Add AI ()
-
-*/
 
 namespace Pong
 {
