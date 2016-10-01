@@ -39,6 +39,8 @@ namespace Pong
         public static Random Random = new Random(); //call .next() or .next (int minimum, int maximum)
         public bool title = true;
         public bool startup = true;
+        public LivesHandeler LivesHandeler = new LivesHandeler();
+        
 
 
         public Game()
@@ -65,7 +67,7 @@ namespace Pong
             
             PlatformRight.ControlUp = Keys.Up;
             PlatformRight.ControlDown = Keys.Down;
-            PongBall.Spawn();
+
 
 
             base.Initialize();
@@ -85,6 +87,10 @@ namespace Pong
             PlatformRight.Position.X = SchreenWith - PlatformRight.sprite.Width;
             PongBall.sprite = Content.Load<Texture2D>("bal.png");
             font = Content.Load<SpriteFont>("Miramob");
+            PlatformLeft.Position.Y = SchreenHeight / 2 - PlatformLeft.sprite.Height / 2;
+            PlatformRight.Position.Y = SchreenHeight / 2 - PlatformRight.sprite.Height / 2;
+            PongBall.Spawn();
+            LivesHandeler.sprite = Content.Load<Texture2D>("bal.png");
 
         }
 
@@ -160,7 +166,8 @@ namespace Pong
             }
             if (title == false)
             {
-
+                LivesHandeler.DrawLives(Game.LivesRight, "Right", spriteBatch);
+                LivesHandeler.DrawLives(Game.LivesLeft, "Left", spriteBatch);
                 //Draw the items with their draw functions
                 PlatformLeft.Draw(spriteBatch);
                 PlatformRight.Draw(spriteBatch);

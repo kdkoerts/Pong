@@ -18,7 +18,7 @@ namespace Pong
         }
         public void Spawn() //Spawn the Ball 
         {
-            Position = new Vector2(Game.SchreenWith / 2 , Game.SchreenHeight / 2);
+            Position = new Vector2(Game.SchreenWith / 2 - sprite.Height /2, Game.SchreenHeight / 2 - sprite.Height / 2);
             int r = Game.Random.Next(0, 2);
             if ( r == 1) Velocity = new Vector2(-5f, 0f);
             else Velocity = new Vector2(5f, 0f);
@@ -56,7 +56,7 @@ namespace Pong
             int PRW = Game.PlatformRight.sprite.Width;
             int PLW = Game.PlatformLeft.sprite.Width;
 
-            //Collision Left || Right
+            //Collision with platforms Left || Right
             if ((  Position.Y < PLP.Y + PLH && Position.Y + sprite.Height > PLP.Y && Position.X < PLP.X + PLW  )||
                 (  Position.Y < PRP.Y + PRH && Position.Y + sprite.Height > PRP.Y && Position.X + sprite.Width > PRP.X  ))
             {
