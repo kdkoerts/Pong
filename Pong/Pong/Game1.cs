@@ -39,6 +39,8 @@ namespace Pong
         public static Random Random = new Random(); //call .next() or .next (int minimum, int maximum)
         public bool title = true;
         public bool startup = true;
+        public int ScoreRight = 0;
+        public int ScoreLeft = 0;
 
 
         public Game()
@@ -119,12 +121,14 @@ namespace Pong
             if (LivesRight <= 0)
             {
                 title = true;
+                ScoreLeft += 1;
                 //Player Right is Dead
                 //Do end of match stuff
             }
             if (LivesLeft <= 0)
             {
                 title = true;
+                ScoreRight += 1;
                 //Player Left is Dead
             }
 
@@ -165,6 +169,8 @@ namespace Pong
                 PlatformLeft.Draw(spriteBatch);
                 PlatformRight.Draw(spriteBatch);
                 PongBall.Draw(spriteBatch);
+                spriteBatch.DrawString(font, "Score:" + ScoreLeft.ToString(), new Vector2(20, SchreenHeight- 20), Color.White);
+                spriteBatch.DrawString(font, "Score:" + ScoreRight.ToString(), new Vector2(SchreenWith-80, SchreenHeight-20), Color.White);
             }
             spriteBatch.End();
         }
