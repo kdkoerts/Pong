@@ -38,6 +38,7 @@ namespace Pong
         public static int LivesRight = 5;
         public static Random Random = new Random(); //call .next() or .next (int minimum, int maximum)
         public bool title = true;
+        public bool Gameover = false;
 
 
         public Game()
@@ -107,21 +108,24 @@ namespace Pong
                 Exit();     //exit on pressing escape
             if (Keyboard.GetState().IsKeyDown(Keys.R)) PongBall.Spawn();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space)) title = false;
-
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                title = false;
+                Gameover = false;
+            }
             if (LivesRight <= 0)
             {
-                title = true;
+                Gameover = true;
                 //Player Right is Dead
                 //Do end of match stuff
             }
             if (LivesLeft <= 0)
             {
-                title = true;
+                Gameover = true;
                 //Player Left is Dead
             }
 
-            if (title == false)
+            if (title == false || Gameover == true)
             {
                 PlatformLeft.Update();
                 PlatformRight.Update();
@@ -151,7 +155,7 @@ namespace Pong
             {
                 spriteBatch.DrawString(font, "Blue WINS!.", new Vector2(250, 200), Color.White);
             }
-            if (title == false)
+            if (title == false && Gameover == false)
             {
 
                 //Draw the items with their draw functions
