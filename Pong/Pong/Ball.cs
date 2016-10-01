@@ -16,31 +16,32 @@ namespace Pong
             Position = Position + Velocity;
             ColisionHandeler();
         }
-        public void Spawn()
+        public void Spawn() //Spawn the Ball 
         {
             Position = new Vector2(Game.SchreenWith / 2 , Game.SchreenHeight / 2);
-            Velocity = new Vector2(5f, 0f);
+            int r = Game.Random.Next(0, 2);
+            if ( r == 1) Velocity = new Vector2(-5f, 0f);
+            else Velocity = new Vector2(5f, 0f);
         }
 
         public void ColisionHandeler() //Check and handle a collision.
-        {
-            
+        {            
             if (Position.Y <= 0)
             {
                 Velocity.Y = -Velocity.Y;
-                Velocity = Velocity * VelocityModifier; //add speed on collision
+                //Velocity = Velocity * VelocityModifier; //add speed on collision
             }
-            else if (Position.Y >= Game.SchreenHeight - sprite.Height) //if it collides with one side it wont with the other
+            else if (Position.Y >= Game.SchreenHeight - sprite.Height) //if it collides with one side it won't with the other
             {
                 Velocity.Y = -Velocity.Y;
-                Velocity = Velocity * VelocityModifier;
+                //Velocity = Velocity * VelocityModifier;
             }
             if (Position.X >= Game.SchreenWith - sprite.Width)
             {
                 Game.LivesRight--;    //deduct a life
                 Spawn();
             }
-            else if (Position.X <= 0)   //if it collides with one side it wont with the other
+            else if (Position.X <= 0)   //if it collides with one side it won't with the other
             {
                 Game.LivesLeft--;
                 Spawn();
@@ -54,9 +55,6 @@ namespace Pong
             int PLH = Game.PlatformLeft.sprite.Height;
             int PRW = Game.PlatformRight.sprite.Width;
             int PLW = Game.PlatformLeft.sprite.Width;
-            //Max upward angle deflexion at Position + sprite.height = P(R?L)P
-            //Max downward angle deflection at Position = P(R?L)P + P(L?R)H
-            //No angle deflection at Position + sprite.Height / 2 = P(LR)P + p(L?R)H / 2
 
             //Collision Left || Right
             if ((  Position.Y < PLP.Y + PLH && Position.Y + sprite.Height > PLP.Y && Position.X < PLP.X + PLW  )||
@@ -67,6 +65,7 @@ namespace Pong
                 int CPW;
                 int CPH;
                 float speed = (float)Math.Sqrt(Math.Pow(Velocity.X, 2) + Math.Pow(Velocity.Y, 2));
+                float xmod = 1;
                 if (Position.X > Game.SchreenWith / 2) //wich side are we on?
                 {
                     //Right Side
@@ -74,6 +73,7 @@ namespace Pong
                     CPW = PRW;
                     CPH = PRH;
                     Position.X = Game.SchreenWith - CPW - sprite.Width;
+                    xmod = -1f;
                 }
                 else
                 {
@@ -81,22 +81,19 @@ namespace Pong
                     CPP = PLP;
                     CPW = PLW;
                     CPH = PLH;
-                    speed = speed * -1;
                     Position.X = CPW;
                 }
                 //Find Relative position
                 Vector2 RelativePos = new Vector2();
-                RelativePos = new Vector2((Position.X + sprite.Width / 2) - (CPP.X + CPW / 2), (Position.Y + sprite.Height / 2) - (CPP.Y + CPH / 2)); //This Fucks Up somehow
-                float MaxRelativePos = CPH / 2 + sprite.Height;
+                RelativePos = new Vector2((CPP.X + CPW / 2) - (Position.X + sprite.Width / 2), (CPP.Y + CPH / 2) - (Position.Y + sprite.Height / 2));
+                float MaxRelativePos = CPH + sprite.Height;
                 //float entryAngle = 
                 float exitAngle = (RelativePos.Y / MaxRelativePos) * ((1) * (float)Math.PI); //Could cause problems in extreme cases (platform edges) TO BE TESTED
 
-                Velocity.X = speed * (float)Math.Sin(exitAngle);
-                Velocity.Y = speed * (float)Math.Cos(exitAngle);                   
+                Velocity.X = xmod * speed * (float)Math.Cos(exitAngle);
+                Velocity.Y = -speed * (float)Math.Sin(exitAngle);
 
-
-                Velocity = Velocity * VelocityModifier; //add speed on collision
-                if (Velocity.X == 0 && Velocity.Y == 0) Spawn();
+                Velocity = Velocity * VelocityModifier;
             }
         }
     }
