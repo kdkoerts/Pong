@@ -28,12 +28,12 @@ namespace Pong
             if (Position.Y <= 0)
             {
                 Velocity.Y = -Velocity.Y;
-                Velocity = Velocity * VelocityModifier; //add speed on collision
+                //Velocity = Velocity * VelocityModifier; //add speed on collision
             }
             else if (Position.Y >= Game.SchreenHeight - sprite.Height) //if it collides with one side it wont with the other
             {
                 Velocity.Y = -Velocity.Y;
-                Velocity = Velocity * VelocityModifier;
+                //Velocity = Velocity * VelocityModifier;
             }
             if (Position.X >= Game.SchreenWith - sprite.Width)
             {
@@ -68,7 +68,6 @@ namespace Pong
                 int CPH;
                 float speed = (float)Math.Sqrt(Math.Pow(Velocity.X, 2) + Math.Pow(Velocity.Y, 2));
                 float xmod = 1;
-                float ymod = 1;
                 if (Position.X > Game.SchreenWith / 2) //wich side are we on?
                 {
                     //Right Side
@@ -77,7 +76,6 @@ namespace Pong
                     CPH = PRH;
                     Position.X = Game.SchreenWith - CPW - sprite.Width;
                     xmod = -1f;
-                    ymod = -1f;
                 }
                 else
                 {
@@ -87,7 +85,6 @@ namespace Pong
                     CPH = PLH;
                     //speed = speed * -1;
                     Position.X = CPW;
-                    ymod = -1;
                 }
                 //Find Relative position
                 Vector2 RelativePos = new Vector2();
@@ -97,7 +94,7 @@ namespace Pong
                 float exitAngle = (RelativePos.Y / MaxRelativePos) * ((1) * (float)Math.PI); //Could cause problems in extreme cases (platform edges) TO BE TESTED
 
                 Velocity.X = xmod * speed * (float)Math.Cos(exitAngle);
-                Velocity.Y = ymod * speed * (float)Math.Sin(exitAngle);                   
+                Velocity.Y = -speed * (float)Math.Sin(exitAngle);                   
 
 
                 Velocity = Velocity * VelocityModifier; //add speed on collision
