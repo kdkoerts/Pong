@@ -16,7 +16,7 @@ namespace Pong
             for (int i = 0; i < lives; i++)
             {
                 if (side == "Right")
-                    spritebatch.Draw(sprite, new Vector2(Game.SchreenWith -  i * sprite.Width, 0));
+                    spritebatch.Draw(sprite, new Vector2(Game.SchreenWith - sprite.Width - i * sprite.Width, 0));
                 else
                     spritebatch.Draw(sprite, new Vector2(i * sprite.Width, 0));
             }
