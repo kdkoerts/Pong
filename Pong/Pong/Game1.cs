@@ -38,7 +38,7 @@ namespace Pong
         public static int LivesRight = 5;
         public static Random Random = new Random(); //call .next() or .next (int minimum, int maximum)
         public bool title = true;
-        public bool Gameover = false;
+        public bool startup = true;
 
 
         public Game()
@@ -109,23 +109,26 @@ namespace Pong
             if (Keyboard.GetState().IsKeyDown(Keys.R)) PongBall.Spawn();
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
+            {//Restart the game
                 title = false;
-                Gameover = false;
+                startup = false;
+                LivesLeft = 5;
+                LivesRight = 5;
             }
+
             if (LivesRight <= 0)
             {
-                Gameover = true;
+                title = true;
                 //Player Right is Dead
                 //Do end of match stuff
             }
             if (LivesLeft <= 0)
             {
-                Gameover = true;
+                title = true;
                 //Player Left is Dead
             }
 
-            if (title == false || Gameover == true)
+            if (title == false)
             {
                 PlatformLeft.Update();
                 PlatformRight.Update();
@@ -143,7 +146,7 @@ namespace Pong
             GraphicsDevice.Clear(Color.Black); //replace previous image with background colors
             spriteBatch.Begin();
             base.Draw(gameTime);
-            if (title == true)
+            if (startup == true)
             {
                 spriteBatch.DrawString(font, "Welcome to Pong! \n Press Space to Start.", new Vector2(250, 200), Color.White);
             }
@@ -155,7 +158,7 @@ namespace Pong
             {
                 spriteBatch.DrawString(font, "Blue WINS!.", new Vector2(250, 200), Color.White);
             }
-            if (title == false && Gameover == false)
+            if (title == false)
             {
 
                 //Draw the items with their draw functions
