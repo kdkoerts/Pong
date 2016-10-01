@@ -3,27 +3,9 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-/*
-
-Add sound {
-    Joke(Tennis grunting Sound?) HIEASda
-}
-
-Add Fancy GFX {
-
-    Trails, Particles etc
-}
-
-Add AI ()
-
-*/
 
 namespace Pong
 {
-
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
     public class Game : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
@@ -36,13 +18,13 @@ namespace Pong
         public static int SchreenWith;
         public static int LivesLeft = 5;
         public static int LivesRight = 5;
-        public static Random Random = new Random(); //call .next() or .next (int minimum, int maximum)
-        public bool title = true;
-        public bool startup = true;
-        public int ScoreRight = 0;
-        public int ScoreLeft = 0;
-        public bool RedWins = false;
-        public bool BlueWins = false;
+        public static Random Random = new Random(); 
+        public bool title = true;                           // A boolean used to change the gamestate.
+        public bool startup = true;                         // A boolean used to check if this gamestate is the first since boot up.
+        public int ScoreRight = 0;                              
+        public int ScoreLeft = 0;                               
+        public bool RedWins = false;                            
+        public bool BlueWins = false;                           
 
         public Game()
         {
