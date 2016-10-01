@@ -38,6 +38,7 @@ namespace Pong
         public static int LivesRight = 5;
         public static Random Random = new Random(); //call .next() or .next (int minimum, int maximum)
         public bool title = true;
+        public bool startup = true;
 
 
         public Game()
@@ -107,7 +108,13 @@ namespace Pong
                 Exit();     //exit on pressing escape
             if (Keyboard.GetState().IsKeyDown(Keys.R)) PongBall.Spawn();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space)) title = false;
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {//Restart the game
+                title = false;
+                startup = false;
+                LivesLeft = 5;
+                LivesRight = 5;
+            }
 
             if (LivesRight <= 0)
             {
@@ -139,7 +146,7 @@ namespace Pong
             GraphicsDevice.Clear(Color.Black); //replace previous image with background colors
             spriteBatch.Begin();
             base.Draw(gameTime);
-            if (title == true)
+            if (startup == true)
             {
                 spriteBatch.DrawString(font, "Welcome to Pong! \n Press Space to Start.", new Vector2(250, 200), Color.White);
             }
