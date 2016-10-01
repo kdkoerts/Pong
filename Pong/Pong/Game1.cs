@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 /*
@@ -26,6 +28,7 @@ namespace Pong
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        private SpriteFont font;
         public static platform PlatformRight = new platform();
         public static platform PlatformLeft = new platform();
         public static Ball PongBall = new Ball();
@@ -33,6 +36,13 @@ namespace Pong
         public static int SchreenWith;
         public static int LivesLeft = 5;
         public static int LivesRight = 5;
+        public static Random Random = new Random(); //call .next() or .next (int minimum, int maximum)
+
+        public static int ColisionsHandled; //debug var
+        public static void CollisionCounter()//debug meth
+        {
+            ColisionsHandled++;
+        }
 
 
         public Game()
@@ -60,10 +70,8 @@ namespace Pong
             
             PlatformRight.ControlUp = Keys.Up;
             PlatformRight.ControlDown = Keys.Down;
-            PongBall.Position = new Vector2(SchreenWith / 2 , SchreenHeight / 2);
-            PongBall.Velocity = new Vector2(1f, -0.5f);
-            //Ball.speed = ()
-            
+            PongBall.Spawn();
+
 
             base.Initialize();
         }
@@ -81,7 +89,8 @@ namespace Pong
             PlatformRight.sprite = Content.Load<Texture2D>("rodeSpeler.png");
             PlatformRight.Position.X = SchreenWith - PlatformRight.sprite.Width;
             PongBall.sprite = Content.Load<Texture2D>("bal.png");
-            
+            font = Content.Load<SpriteFont>("Miramob");
+
         }
 
         /// <summary>
@@ -101,8 +110,9 @@ namespace Pong
         protected override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-            //exit on pressing escape
+                Exit();     //exit on pressing escape
+            if (Keyboard.GetState().IsKeyDown(Keys.R)) PongBall.Spawn();
+            
             if (LivesRight < 0)
             {
                 //Player Right is Dead
@@ -135,7 +145,7 @@ namespace Pong
             base.Draw(gameTime);
 
             //spriteBatch.DrawString(
-
+            spriteBatch.DrawString(font, ColisionsHandled.ToString(), new Vector2(100, 100), Color.White);
 
             //Draw the items with their draw functions
             PlatformLeft.Draw(spriteBatch);
