@@ -75,6 +75,7 @@ namespace Pong
             LivesHandeler.sprite = Content.Load<Texture2D>("bal.png");
             font = Content.Load<SpriteFont>("Miramob");
             PlatformRight.Position.X = SchreenWith - PlatformRight.sprite.Width;    //Sets the X-Position of the right platform. We do this here cause this needs the sprite width.
+            PongBall.Spawn();           // Used to spawn the ball the first time
         }
 
         /// <summary>
